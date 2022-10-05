@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    width: 70%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+    background: #fff;
+    border-radius: 0 10px 10px 0;
+    border-left: 2px solid var(--gray);
 
     .msgInitialChat {
         color: var(--colorFont);

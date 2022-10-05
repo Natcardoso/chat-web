@@ -1,31 +1,29 @@
 import styled from "styled-components";
 
-interface ChatProps {
+type PropsStyle = {
     styleActive: boolean;
-}
+};
 
-export const Container = styled.div``;
+export const Container = styled.div`
+    width: 100%;
+`;
 
-export const Chat = styled.div<ChatProps>`
+export const Chat = styled.div<PropsStyle>`
     display: flex;
-    border-radius: 4px;
+    border-radius: 20px;
     align-items: center;
     padding: 0.5rem 1rem;
     margin-bottom: 0.5rem;
-    background: var(--white);
     cursor: pointer;
-    border-left: ${({ styleActive }) =>
-        styleActive ? "4px solid var(--green)" : "4px solid var(--gray)"};
-    transition: border-left 0.2s ease;
 
     :hover {
-        border-left: 4px solid var(--green);
+        background: var(--gray);
     }
 
     svg,
     img {
-        width: 80px;
-        height: 80px;
+        width: 70px;
+        height: 70px;
         border-radius: 40px;
         margin-right: 0.5rem;
         color: var(--colorIcons);
@@ -36,7 +34,7 @@ export const Chat = styled.div<ChatProps>`
         display: flex;
         flex-direction: column;
 
-        .name_hours {
+        .name {
             display: flex;
             flex-direction: row;
             width: 100%;
@@ -49,20 +47,14 @@ export const Chat = styled.div<ChatProps>`
             font-weight: 700;
             font-size: 19px;
         }
-
-        .hours {
-            color: var(--colorFont);
-            font-size: 14px;
-        }
     }
 `;
 
-export const Message = styled.span`
-    width: 22rem;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-size: 17px;
+export const Message = styled.div`
+    font-size: 14px;
     color: var(--colorFont);
-    font-weight: 500;
+    width: 13rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 `;

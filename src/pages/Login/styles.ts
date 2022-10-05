@@ -9,14 +9,23 @@ export const Container = styled.div`
     background: var(--green);
 `;
 
-const animationMsgErro = keyframes``;
+const animationMsgErro = keyframes`
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+`;
 
 export const MsgErroLogin = styled.div`
     border-radius: 20px;
     background: #ffd1d1;
     border-radius: 20px;
-    animation: ${animationMsgErro} 0.5s linear;
     padding: 1rem;
+    margin-bottom: 2rem;
+    animation: ${animationMsgErro} 0.8s linear;
 
     div {
         font-size: 14px;
@@ -43,7 +52,7 @@ export const Form = styled.form`
     input:not(:last-child) {
         width: 100%;
         border: none;
-        margin-top: 1rem;
+        margin-bottom: 1rem;
         padding: 0.5rem;
         font-size: 18px;
         border-bottom: 1px solid var(--green);

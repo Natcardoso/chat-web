@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const Container = styled.div`
     width: 100%;
@@ -11,7 +11,6 @@ export const Container = styled.div`
 
 export const Form = styled.form`
     width: 20%;
-    height: max-content;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,6 +31,7 @@ export const Form = styled.form`
         padding: 0.5rem;
         font-size: 18px;
         border-bottom: 1px solid var(--green);
+        outline: none;
 
         ::-webkit-input-placeholder {
             color: var(--colorFont);

@@ -1,20 +1,35 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+    background: black;
     display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100vh;
-    width: 100%;
+`;
+
+export const ContainerContent = styled.div`
+    display: flex;
     background-color: #ffffff00;
+    width: 90%;
+    height: 90%;
 `;
 
 export const ContainerChatList = styled.div`
-    width: 30%;
-    background: var(--gray);
+    width: 40%;
+    background: #fff;
+    position: relative;
 `;
 
 export const HeaderChatList = styled.div`
     padding: 2rem;
     padding-bottom: 0;
+`;
+
+export const HeaderProfile = styled.div`
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--gray);
 
     div {
         margin-bottom: 2rem;
@@ -22,24 +37,31 @@ export const HeaderChatList = styled.div`
         align-items: center;
 
         img {
-            border-radius: 50%;
-            width: 15%;
+            border-radius: 50px;
+            width: 80px;
+            height: 80px;
             margin-right: 1rem;
+            object-fit: cover;
         }
 
         span {
             font-size: 20px;
             font-weight: 700;
         }
+
+        svg {
+            cursor: pointer;
+            color: var(--colorIcons);
+        }
     }
 `;
 
 export const FilterChatList = styled.div`
-    margin: 1rem 0;
+    margin: 2rem 0;
     display: flex;
     align-items: center;
-    border-radius: 10px;
-    background: var(--white);
+    border-radius: 20px;
+    background: var(--gray);
     padding: 1rem;
 
     svg {
@@ -52,6 +74,7 @@ export const FilterChatList = styled.div`
         font-size: 14px;
         outline: none;
         border: none;
+        background-color: transparent;
     }
 
     input::-webkit-input-placeholder {
@@ -60,7 +83,7 @@ export const FilterChatList = styled.div`
 `;
 
 export const ContainerContactList = styled.div`
-    height: 70%;
+    height: 68%;
     padding: 0 2rem;
     overflow-y: scroll;
 
@@ -70,7 +93,7 @@ export const ContainerContactList = styled.div`
     }
 
     ::-webkit-scrollbar-track {
-        background: var(--gray);
+        background: #fff;
     }
 
     ::-webkit-scrollbar-thumb {

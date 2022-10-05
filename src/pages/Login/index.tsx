@@ -1,9 +1,10 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../Api";
-import { Container, Form, MsgErroLogin } from "./styles";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebaseConfig";
+import { Container, Form, MsgErroLogin } from "./styles";
 
 type DataProps = {
     email: string;
@@ -11,6 +12,7 @@ type DataProps = {
 };
 
 export function Login() {
+    const navigate = useNavigate();
     const [error, setError] = useState<boolean>(false);
     const {
         register,
@@ -18,11 +20,9 @@ export function Login() {
         formState: { errors },
     } = useForm<DataProps>();
     const onSubmit: SubmitHandler<DataProps> = (data) => {
-        console.log(data);
-
         signInWithEmailAndPassword(auth, data.email, data.password)
             .then((userCredential) => {
-                const user = userCredential.user;
+                navigate("/");
             })
             .catch((_error) => {
                 setError(true);

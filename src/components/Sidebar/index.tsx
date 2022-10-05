@@ -1,7 +1,7 @@
 import { Container } from "./styles";
 import { BsChatDots } from "react-icons/bs";
 import { MdOutlineExitToApp } from "react-icons/md";
-import { auth } from "../../Api";
+import { auth } from "../../firebaseConfig";
 import { signOut } from "firebase/auth";
 
 export function Sidebar() {
@@ -11,11 +11,15 @@ export function Sidebar() {
                 <BsChatDots size={40} />
                 <span>web</span>
             </div>
-            <div>
-                <button onClick={() => signOut(auth)}>
-                    <MdOutlineExitToApp size={25} />
-                </button>
-            </div>
+            {auth.currentUser && (
+                <div className="buttonExit">
+                    <MdOutlineExitToApp
+                        size={25}
+                        onClick={() => signOut(auth)}
+                    />
+                    <span className="tooltip">Sair</span>
+                </div>
+            )}
         </Container>
     );
 }
