@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
-import { Container, Form, MsgErroLogin } from "./styles";
+import { Container, Form, Logo, MsgErroLogin } from "./styles";
+import { BsChatDots } from "react-icons/bs";
 
 type DataProps = {
     email: string;
@@ -32,6 +33,10 @@ export function Login() {
     return (
         <Container>
             <Form onSubmit={handleSubmit(onSubmit)}>
+                <Logo>
+                    <BsChatDots size={25} />
+                    <span>ChatWeb</span>
+                </Logo>
                 <span>Entrar</span>
                 {error && (
                     <MsgErroLogin>

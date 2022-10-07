@@ -1,4 +1,4 @@
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/authContext";
 import { db } from "../../firebaseConfig";
@@ -20,7 +20,7 @@ export function ContactList({ contactUserName }: Props) {
     const [chats, setChats] = useState<any>([]);
     const { currentUser } = useContext(AuthContext);
     const { dispatch, data } = useContext(ChatContext);
-    const [time, setTime] = useState("");
+    const [openWindownChat, setOpenWindownChat] = useState(false);
 
     useEffect(() => {
         const getChats = () => {
@@ -37,23 +37,23 @@ export function ContactList({ contactUserName }: Props) {
         };
 
         currentUser.uid && getChats();
-    }, [currentUser.uid]);
+    }, [currentUser.uid, openWindownChat]);
 
-    const handleSelect = (u: dataUser) => {
+    const handleSelect = async (u: dataUser) => {
         dispatch({ type: "change_user", payload: u });
     };
 
-    const orderChats = Object.entries(chats).sort(
-        (a: any, b: any) => b[1].date - a[1].date
-    );
+    const orderChats =
+        chats &&
+        Object.entries(chats).sort((a: any, b: any) => b[1].date - a[1].date);
 
-    const filterContact = orderChats.filter((chat: any) =>
-        chat[1].userInfo.displayName.includes(contactUserName)
+    const filterContact = orderChats?.filter((chat: any) =>
+        chat[1].userInfo?.displayName.includes(contactUserName)
     );
 
     return (
         <Container>
-            {filterContact.map((chat: any) => {
+            {filterContact?.map((chat: any) => {
                 const date = chat[1].date;
                 let d = new Date(date?.seconds * 1000);
                 let hours = d.getHours();
@@ -64,7 +64,9 @@ export function ContactList({ contactUserName }: Props) {
                 return (
                     <Chat
                         key={chat[0]}
-                        onClick={() => handleSelect(chat[1].userInfo)}
+                        onClick={() => {
+                            handleSelect(chat[1].userInfo);
+                        }}
                         styleActive={data.chatId === chat[0]}
                     >
                         {chat[1].userInfo.photoURL ? (
@@ -72,7 +74,7 @@ export function ContactList({ contactUserName }: Props) {
                         ) : (
                             <IoPersonCircleSharp />
                         )}
-                        <div>
+                        <div className="containerName">
                             <div className="name">
                                 <span>{chat[1].userInfo.displayName}</span>
                             </div>
@@ -85,9 +87,16 @@ export function ContactList({ contactUserName }: Props) {
                                     ? minutes + "0"
                                     : minutes
                             }`}</div>
-                            {chat[1].lastMessage?.uid === "received" && (
-                                <div></div>
-                            )}
+                            {/* {chat[1].lastMessage?.uid === "received" && (
+                                <div
+                                    className="on"
+                                    style={{
+                                        display: chat[1].view.view
+                                            ? "none"
+                                            : "block",
+                                    }}
+                                ></div>
+                            )} */}
                         </div>
                     </Chat>
                 );

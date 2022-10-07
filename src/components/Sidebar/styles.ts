@@ -23,7 +23,7 @@ export const Container = styled.div`
             color: #fff;
             position: absolute;
             top: -2rem;
-            right: 0.8rem;
+            right: 0.2rem;
             background: black;
             padding: 2px 8px;
             border-radius: 4px;

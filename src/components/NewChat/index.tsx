@@ -5,15 +5,18 @@ import {
     doc,
     getDoc,
     getDocs,
+    query,
     serverTimestamp,
     setDoc,
     updateDoc,
+    where,
 } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/authContext";
 import { Loading } from "../Loading";
 import { Navigate } from "react-router-dom";
+import { ChatContext } from "../../Context/chatContext";
 
 type Props = {
     setOpenNewChat: React.Dispatch<React.SetStateAction<boolean>>;
@@ -29,6 +32,7 @@ export function NewChat({ setOpenNewChat }: Props) {
     const { currentUser } = useContext(AuthContext);
     const [listContact, setListContact] = useState<DataProps[]>([]);
     const [loading, setLoading] = useState(false);
+    const { dispatch } = useContext(ChatContext);
 
     useEffect(() => {
         setLoading(true);
@@ -57,32 +61,38 @@ export function NewChat({ setOpenNewChat }: Props) {
     }, []);
 
     const handleSelect = async (id: DataProps) => {
+        const combinedId =
+            currentUser.uid > id.uid
+                ? currentUser.uid + id.uid
+                : id.uid + currentUser.uid;
+
         try {
-            const res = await getDoc(doc(db, "chats", id.uid));
+            const res = await getDoc(doc(db, "chats", combinedId));
 
             if (!res.exists()) {
-                await setDoc(doc(db, "chats", id.uid), { messages: [] });
+                await setDoc(doc(db, "chats", combinedId), { messages: [] });
                 await updateDoc(doc(db, "userChats", currentUser.uid), {
-                    [id.uid + ".userInfo"]: {
+                    [combinedId + ".userInfo"]: {
                         uid: id.uid,
                         displayName: id.displayName,
                         photoURL: id.photoURL,
                     },
-                    [id.uid + ".date"]: serverTimestamp(),
+                    [combinedId + ".date"]: serverTimestamp(),
                 });
                 await updateDoc(doc(db, "userChats", id.uid), {
-                    [id.uid + ".userInfo"]: {
+                    [combinedId + ".userInfo"]: {
                         uid: currentUser.uid,
                         displayName: currentUser.displayName,
                         photoURL: currentUser.photoURL,
                     },
-                    [id + ".date"]: serverTimestamp(),
+                    [combinedId + ".date"]: serverTimestamp(),
                 });
             }
         } catch (err) {
             console.log(err);
         }
 
+        dispatch({ type: "change_user", payload: id });
         setOpenNewChat(false);
     };
 

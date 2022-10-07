@@ -24,11 +24,16 @@ export const ChatContextProvider = ({ children }: Props) => {
         switch (action.type) {
             case "change_user":
                 return {
-                    user: action.payload,
                     chatId:
                         currentUser.uid > action.payload.uid
                             ? currentUser.uid + action.payload.uid
                             : action.payload.uid + currentUser.uid,
+                    user: action.payload,
+                };
+            case "null":
+                return {
+                    chatId: "null",
+                    user: {},
                 };
 
             default: {

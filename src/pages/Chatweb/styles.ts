@@ -83,7 +83,7 @@ export const FilterChatList = styled.div`
 `;
 
 export const ContainerContactList = styled.div`
-    height: 68%;
+    height: 67%;
     padding: 0 2rem;
     overflow-y: scroll;
 

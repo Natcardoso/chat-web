@@ -1,8 +1,8 @@
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
-import { Container, Form } from "./styles";
+import { Container, Form, PhotoAdd, Logo } from "./styles";
 import { MsgErroLogin } from "../Login/styles";
 
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
@@ -11,6 +11,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../../firebaseConfig";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
+import { BsChatDots } from "react-icons/bs";
 
 type DataProps = {
     name: string;
@@ -22,6 +23,7 @@ type DataProps = {
 export function Register() {
     const [err, setErr] = useState<boolean>(false);
     const navigate = useNavigate();
+    const [photo, setPhoto] = useState<any>();
 
     const {
         register,
@@ -74,9 +76,25 @@ export function Register() {
         }
     };
 
+    let imgSrc = useRef<any>();
+    const readerPhoto = photo?.item(0);
+
+    let reader = new FileReader();
+    reader.onload = () => {
+        imgSrc.current.src = reader.result;
+    };
+
+    if (readerPhoto) {
+        reader.readAsDataURL(readerPhoto);
+    }
+
     return (
         <Container>
             <Form onSubmit={handleSubmit(onSubmit)}>
+                <Logo>
+                    <BsChatDots size={25} />
+                    <span>ChatWeb</span>
+                </Logo>
                 <span>Cadastro</span>
                 {err && (
                     <MsgErroLogin>
@@ -90,11 +108,27 @@ export function Register() {
                 <input {...register("name")} placeholder="Nome e sobrenome" />
                 <input {...register("email")} placeholder="Email" />
                 <input {...register("password")} placeholder="Senha" />
-                <input {...register("file")} type={"file"} id="file" />
+                <input
+                    {...register("file")}
+                    type={"file"}
+                    id="file"
+                    accept="image/*"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setPhoto(e.target.files)
+                    }
+                />
                 <label htmlFor="file">
-                    <MdOutlineAddPhotoAlternate size={40} />
+                    {readerPhoto ? (
+                        <PhotoAdd ref={imgSrc} />
+                    ) : (
+                        <MdOutlineAddPhotoAlternate size={50} />
+                    )}
 
-                    <span>Adicionar foto de perfil</span>
+                    {readerPhoto ? (
+                        <span>Escolher outra foto</span>
+                    ) : (
+                        <span>Adicionar foto de perfil</span>
+                    )}
                 </label>
 
                 <button type="submit">Cadastrar</button>

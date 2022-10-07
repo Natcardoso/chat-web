@@ -30,9 +30,11 @@ export const Chat = styled.div<PropsStyle>`
         object-fit: cover;
     }
 
-    div {
+    .containerName {
         display: flex;
+        justify-content: space-between;
         flex-direction: column;
+        width: 100%;
 
         .name {
             display: flex;
@@ -48,12 +50,30 @@ export const Chat = styled.div<PropsStyle>`
             font-size: 19px;
         }
     }
+
+    .countMessage {
+        color: var(--colorFont);
+        font-size: 12px;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+
+        .on {
+            content: "";
+            color: var(--green);
+            width: 0.8rem;
+            height: 0.8rem;
+            background-color: var(--green);
+            border-radius: 50%;
+            margin-top: 0.5rem;
+        }
+    }
 `;
 
 export const Message = styled.div`
     font-size: 14px;
     color: var(--colorFont);
-    width: 13rem;
+    width: 15rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

@@ -48,6 +48,7 @@ export const Form = styled.form`
         width: 100%;
         height: max-content;
         gap: 10px;
+        margin-top: 1rem;
         cursor: pointer;
 
         svg {
@@ -56,8 +57,17 @@ export const Form = styled.form`
 
         span {
             margin: 0;
-            color: var(--colorFont);
             font-size: 16px;
+            width: max-content;
+            padding: 0.5rem;
+            border-radius: 20px;
+            background-color: var(--colorFont);
+            text-align: center;
+            color: #fff;
+
+            :hover {
+                opacity: 0.8;
+            }
         }
     }
 
@@ -86,5 +96,26 @@ export const Form = styled.form`
     a {
         text-decoration: none;
         color: var(--green);
+    }
+`;
+
+export const PhotoAdd = styled.img`
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+`;
+
+export const Logo = styled.div`
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    color: var(--green);
+
+    span {
+        font-size: 14px;
+        margin: 0;
+        margin-left: 0.5rem;
     }
 `;

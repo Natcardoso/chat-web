@@ -67,29 +67,33 @@ export default function ChatWindown() {
 
     const handleSend = async () => {
         setLoading(true);
-        await updateDoc(doc(db, "chats", data.chatId), {
-            messages: arrayUnion({
-                id: uuid(),
-                text,
-                senderId: currentUser.uid,
-                date: Timestamp.now(),
-            }),
-        });
+        try {
+            await updateDoc(doc(db, "chats", data.chatId), {
+                messages: arrayUnion({
+                    id: uuid(),
+                    text,
+                    senderId: currentUser.uid,
+                    date: Timestamp.now(),
+                }),
+            });
 
-        await updateDoc(doc(db, "userChats", currentUser.uid), {
-            [data.chatId + ".lastMessage"]: {
-                text,
-                uid: "send",
-            },
-            [data.chatId + ".date"]: serverTimestamp(),
-        });
-        await updateDoc(doc(db, "userChats", data.user.uid), {
-            [data.chatId + ".lastMessage"]: {
-                text,
-                uid: "received",
-            },
-            [data.chatId + ".date"]: serverTimestamp(),
-        });
+            await updateDoc(doc(db, "userChats", currentUser.uid), {
+                [data.chatId + ".lastMessage"]: {
+                    text,
+                    uid: "send",
+                },
+                [data.chatId + ".date"]: serverTimestamp(),
+            });
+            await updateDoc(doc(db, "userChats", data.user.uid), {
+                [data.chatId + ".lastMessage"]: {
+                    text,
+                    uid: "received",
+                },
+                [data.chatId + ".date"]: serverTimestamp(),
+            });
+        } catch (err) {
+            console.log(err);
+        }
 
         setOpenEmoji(false);
         setText("");

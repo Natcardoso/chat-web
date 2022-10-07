@@ -90,3 +90,17 @@ export const Form = styled.form`
         color: var(--green);
     }
 `;
+
+export const Logo = styled.div`
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    color: var(--green);
+
+    span {
+        font-size: 14px;
+        margin: 0;
+        margin-left: 0.5rem;
+    }
+`;
