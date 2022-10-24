@@ -1,17 +1,22 @@
-import React, { ReactNode, useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { Loading } from "./components/Loading";
 import { AuthContext } from "./Context/authContext";
 import Chatweb from "./pages/Chatweb";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 
 function App() {
-    const { currentUser } = useContext(AuthContext);
+    const { currentUser, userActive } = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
 
     const ProtectRoute = ({ children }: any): JSX.Element => {
-        if (!currentUser) {
+        setLoading(true);
+        if (!currentUser && userActive == "") {
             return <Navigate to="/login" />;
         }
+
+        setLoading(false);
 
         return children;
     };
@@ -24,7 +29,7 @@ function App() {
                         index
                         element={
                             <ProtectRoute>
-                                <Chatweb />
+                                <Chatweb loading={loading} />
                             </ProtectRoute>
                         }
                     />

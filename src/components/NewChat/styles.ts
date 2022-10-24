@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 export const Container = styled.div`
     position: absolute;
     background: white;
-    width: 86.5%;
+    width: 100%;
     height: 100%;
     padding: 0 2rem;
 `;

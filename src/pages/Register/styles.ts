@@ -10,9 +10,11 @@ export const Container = styled.div`
 `;
 
 export const Form = styled.form`
-    width: 20%;
+    width: 25%;
+    height: 65%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     border-radius: 20px;
     padding: 2.5rem;

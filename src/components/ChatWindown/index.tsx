@@ -1,5 +1,6 @@
 import {
     AreaMessage,
+    ButtonSend,
     Container,
     ContainerMessageLine,
     Footer,
@@ -61,9 +62,9 @@ export default function ChatWindown() {
         setText(text + emojiObject.emoji);
     };
 
-    // const handleKeyDown = (e: { code: string }) => {
-    //     e.code === "Enter" && handleSend();
-    // };
+    const handleKeyDown = (e: { code: string }) => {
+        e.code === "Enter" && handleSend();
+    };
 
     const handleSend = async () => {
         setLoading(true);
@@ -76,18 +77,15 @@ export default function ChatWindown() {
                     date: Timestamp.now(),
                 }),
             });
-
             await updateDoc(doc(db, "userChats", currentUser.uid), {
                 [data.chatId + ".lastMessage"]: {
                     text,
-                    uid: "send",
                 },
                 [data.chatId + ".date"]: serverTimestamp(),
             });
             await updateDoc(doc(db, "userChats", data.user.uid), {
                 [data.chatId + ".lastMessage"]: {
                     text,
-                    uid: "received",
                 },
                 [data.chatId + ".date"]: serverTimestamp(),
             });
@@ -184,27 +182,27 @@ export default function ChatWindown() {
                                 value={text}
                                 autoFocus
                                 onChange={(e) => setText(e.target.value)}
+                                onKeyDown={handleKeyDown}
                             />
-
-                            <div>
-                                {loading ? (
-                                    <AiOutlineLoading3Quarters
-                                        className="iconLoading"
-                                        size={25}
-                                    />
-                                ) : (
-                                    <MdSend
-                                        onClick={() => {
-                                            if (text) {
-                                                handleSend();
-                                            }
-                                        }}
-                                        className="iconSend"
-                                        size={25}
-                                    />
-                                )}
-                            </div>
                         </InputMessage>
+                        <ButtonSend>
+                            {loading ? (
+                                <AiOutlineLoading3Quarters
+                                    className="iconLoading"
+                                    size={45}
+                                />
+                            ) : (
+                                <MdSend
+                                    onClick={() => {
+                                        if (text) {
+                                            handleSend();
+                                        }
+                                    }}
+                                    className="iconSend"
+                                    size={45}
+                                />
+                            )}
+                        </ButtonSend>
                     </Footer>
                 </Container>
             )}

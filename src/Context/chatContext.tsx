@@ -30,7 +30,7 @@ export const ChatContextProvider = ({ children }: Props) => {
                             : action.payload.uid + currentUser.uid,
                     user: action.payload,
                 };
-            case "null":
+            case "logout":
                 return {
                     chatId: "null",
                     user: {},

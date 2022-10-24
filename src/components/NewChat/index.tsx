@@ -57,7 +57,10 @@ export function NewChat({ setOpenNewChat }: Props) {
             } catch (err) {}
         };
         getUser();
-        setLoading(false);
+
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000);
     }, []);
 
     const handleSelect = async (id: DataProps) => {

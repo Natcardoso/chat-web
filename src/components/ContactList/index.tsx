@@ -1,4 +1,4 @@
-import { doc, onSnapshot, updateDoc } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/authContext";
 import { db } from "../../firebaseConfig";
@@ -20,12 +20,11 @@ export function ContactList({ contactUserName }: Props) {
     const [chats, setChats] = useState<any>([]);
     const { currentUser } = useContext(AuthContext);
     const { dispatch, data } = useContext(ChatContext);
-    const [openWindownChat, setOpenWindownChat] = useState(false);
 
     useEffect(() => {
         const getChats = () => {
             const unsub = onSnapshot(
-                doc(db, "userChats", currentUser.uid),
+                doc(db, "userChats", currentUser?.uid),
                 (doc) => {
                     setChats(doc.data());
                 }
@@ -36,8 +35,8 @@ export function ContactList({ contactUserName }: Props) {
             };
         };
 
-        currentUser.uid && getChats();
-    }, [currentUser.uid, openWindownChat]);
+        currentUser?.uid && getChats();
+    }, [currentUser?.uid]);
 
     const handleSelect = async (u: dataUser) => {
         dispatch({ type: "change_user", payload: u });
@@ -70,13 +69,13 @@ export function ContactList({ contactUserName }: Props) {
                         styleActive={data.chatId === chat[0]}
                     >
                         {chat[1].userInfo.photoURL ? (
-                            <img src={chat[1].userInfo.photoURL}></img>
+                            <img src={chat[1].userInfo?.photoURL}></img>
                         ) : (
                             <IoPersonCircleSharp />
                         )}
                         <div className="containerName">
                             <div className="name">
-                                <span>{chat[1].userInfo.displayName}</span>
+                                <span>{chat[1].userInfo?.displayName}</span>
                             </div>
 
                             <Message>{chat[1].lastMessage?.text}</Message>
@@ -87,16 +86,6 @@ export function ContactList({ contactUserName }: Props) {
                                     ? minutes + "0"
                                     : minutes
                             }`}</div>
-                            {/* {chat[1].lastMessage?.uid === "received" && (
-                                <div
-                                    className="on"
-                                    style={{
-                                        display: chat[1].view.view
-                                            ? "none"
-                                            : "block",
-                                    }}
-                                ></div>
-                            )} */}
                         </div>
                     </Chat>
                 );

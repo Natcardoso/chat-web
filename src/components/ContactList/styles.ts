@@ -14,6 +14,7 @@ export const Chat = styled.div<PropsStyle>`
     align-items: center;
     padding: 0.5rem 1rem;
     margin-bottom: 0.5rem;
+    background: ${({ styleActive }) => styleActive && "var(--gray)"};
     cursor: pointer;
 
     :hover {
@@ -22,10 +23,10 @@ export const Chat = styled.div<PropsStyle>`
 
     svg,
     img {
-        width: 70px;
-        height: 70px;
+        width: 75px;
+        height: 75px;
         border-radius: 40px;
-        margin-right: 0.5rem;
+        margin-right: 1rem;
         color: var(--colorIcons);
         object-fit: cover;
     }
@@ -34,7 +35,6 @@ export const Chat = styled.div<PropsStyle>`
         display: flex;
         justify-content: space-between;
         flex-direction: column;
-        width: 100%;
 
         .name {
             display: flex;

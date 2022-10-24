@@ -23,24 +23,26 @@ export const MsgErroLogin = styled.div`
     border-radius: 20px;
     background: #ffd1d1;
     border-radius: 20px;
-    padding: 1rem;
+    padding: 0.5rem;
+    text-align: center;
     margin-bottom: 2rem;
     animation: ${animationMsgErro} 0.8s linear;
 
     div {
-        font-size: 14px;
+        font-size: 13px;
         color: #a50707;
     }
 `;
 
 export const Form = styled.form`
-    width: 20%;
-    height: max-content;
+    width: 25%;
+    height: 55%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     border-radius: 20px;
-    padding: 2.5rem;
+    padding: 2rem;
     background: white;
 
     span {

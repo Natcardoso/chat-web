@@ -132,10 +132,10 @@ const Loading = keyframes`
 
 export const InputMessage = styled.div`
     display: flex;
-    padding: 0.5rem 2rem;
+    padding: 0.8rem 2rem;
     background-color: var(--input);
     border-radius: 20px;
-    margin-left: 1.5rem;
+    margin: 0 1.5rem;
     width: 100%;
 
     input {
@@ -150,21 +150,21 @@ export const InputMessage = styled.div`
             color: var(--colorFont);
         }
     }
+`;
 
-    div {
-        .iconLoading {
-            background: var(--green);
-            color: white;
-            padding: 0.5rem;
-            border-radius: 40px;
-            animation: ${Loading} 0.9s infinite linear;
-        }
+export const ButtonSend = styled.div`
+    .iconLoading {
+        background: var(--green);
+        color: white;
+        padding: 0.5rem;
+        border-radius: 40px;
+        animation: ${Loading} 0.9s infinite linear;
+    }
 
-        .iconSend {
-            background: var(--green);
-            color: white;
-            padding: 0.5rem;
-            border-radius: 40px;
-        }
+    .iconSend {
+        background: var(--green);
+        color: white;
+        padding: 0.5rem;
+        border-radius: 40px;
     }
 `;

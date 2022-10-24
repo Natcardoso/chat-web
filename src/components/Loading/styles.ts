@@ -9,6 +9,9 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: ${Loading} 0.8s infinite linear;
     height: 100%;
+
+    svg {
+        animation: ${Loading} 0.8s infinite linear;
+    }
 `;

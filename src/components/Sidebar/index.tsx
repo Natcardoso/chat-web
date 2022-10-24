@@ -5,9 +5,11 @@ import { auth } from "../../firebaseConfig";
 import { signOut } from "firebase/auth";
 import { useContext } from "react";
 import { ChatContext } from "../../Context/chatContext";
+import { AuthContext } from "../../Context/authContext";
 
 export function Sidebar() {
     const { dispatch } = useContext(ChatContext);
+    const { setUserActive } = useContext(AuthContext);
 
     return (
         <Container>
@@ -15,18 +17,17 @@ export function Sidebar() {
                 <BsChatDots size={40} />
                 <span>ChatWeb</span>
             </div>
-            {auth.currentUser && (
-                <div className="buttonExit">
-                    <MdOutlineExitToApp
-                        size={25}
-                        onClick={() => {
-                            dispatch({ type: "null", payload: {} });
-                            signOut(auth);
-                        }}
-                    />
-                    <span className="tooltip">Sair</span>
-                </div>
-            )}
+            <div className="buttonExit">
+                <MdOutlineExitToApp
+                    size={25}
+                    onClick={() => {
+                        dispatch({ type: "logout", payload: {} });
+                        signOut(auth);
+                        setUserActive("");
+                    }}
+                />
+                <span className="tooltip">Sair</span>
+            </div>
         </Container>
     );
 }

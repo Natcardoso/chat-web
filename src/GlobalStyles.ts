@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         font-family: 'Raleway', sans-serif;
         scroll-behavior: smooth;
+        box-sizing: border-box;
     }
 
     :root {

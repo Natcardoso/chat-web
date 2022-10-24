@@ -1,25 +1,38 @@
 import { onAuthStateChanged, User } from "firebase/auth";
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebaseConfig";
 
-type dataContext = {
+type INITIAL_STATE = {
     currentUser: any;
+    setUserActive: React.Dispatch<React.SetStateAction<string>>;
+    userActive: string;
 };
 
-type Props = {
-    children: ReactNode;
-};
+export const AuthContext = createContext<INITIAL_STATE>({} as INITIAL_STATE);
 
-export const AuthContext = createContext<dataContext>({} as dataContext);
-
-export const AuthContextProvider = ({ children }: Props) => {
+export const AuthContextProvider = ({ children }: any) => {
     const [currentUser, setCurrentUser] = useState<User | null>();
+    const initialValues = localStorage.getItem("user") || "";
+    const [userActive, setUserActive] = useState(initialValues);
 
     useEffect(() => {
-        onAuthStateChanged(auth, (user: User | null) => setCurrentUser(user));
+        let unsub = onAuthStateChanged(auth, (user) => {
+            setCurrentUser(user);
+        });
+
+        return () => {
+            unsub();
+        };
     }, []);
+
+    useEffect(() => {
+        localStorage.setItem("user", JSON.stringify(userActive));
+    }, [userActive]);
+
     return (
-        <AuthContext.Provider value={{ currentUser }}>
+        <AuthContext.Provider
+            value={{ currentUser, setUserActive, userActive }}
+        >
             {children}
         </AuthContext.Provider>
     );
