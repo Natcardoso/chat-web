@@ -19,11 +19,11 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 📄 Funcionalidades
 
-- Adicionar amigos
+- Adicionar contatos
 - Enviar mensagens
 - Emojis
 - Colocar foto de perfil
-- Pesquisar amigo
+- Pesquisar contatos
 
 ---
 
