@@ -19,6 +19,8 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 📄 Funcionalidades
 
+- Login
+- Autentificação de usuário
 - Adicionar contatos
 - Enviar mensagens
 - Emojis
