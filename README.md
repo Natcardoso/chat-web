@@ -23,6 +23,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - Enviar mensagens
 - Emojis
 - Colocar foto de perfil
+- Pesquisar amigo
 
 ---
 
