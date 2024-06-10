@@ -120,7 +120,7 @@ export function NewChat({ setOpenNewChat }: Props) {
                                 className="chat"
                             >
                                 {e.photoURL ? (
-                                    <img src={e.photoURL}></img>
+                                    <img src={e.photoURL} alt="" />
                                 ) : (
                                     <IoPersonCircleSharp />
                                 )}

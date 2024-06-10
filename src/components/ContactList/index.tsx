@@ -71,7 +71,7 @@ export function ContactList({ contactUserName }: Props) {
                         styleActive={data.chatId === chat[0]}
                     >
                         {chat[1].userInfo.photoURL ? (
-                            <img src={chat[1].userInfo?.photoURL}></img>
+                            <img src={chat[1].userInfo?.photoURL} alt="" />
                         ) : (
                             <IoPersonCircleSharp />
                         )}

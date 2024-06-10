@@ -42,7 +42,7 @@ export default function Chatweb({ loading }: Props) {
                         <HeaderChatList>
                             <HeaderProfile>
                                 <div>
-                                    <img src={currentUser?.photoURL} />
+                                    <img src={currentUser?.photoURL} alt="" />
                                     <span>{currentUser?.displayName}</span>
                                 </div>
                                 <div>

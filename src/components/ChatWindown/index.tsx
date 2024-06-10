@@ -109,7 +109,7 @@ export default function ChatWindown() {
                 <Container>
                     <Header>
                         {data.user?.photoURL ? (
-                            <img src={data.user?.photoURL} />
+                            <img src={data.user?.photoURL} alt="" />
                         ) : (
                             <IoPersonCircleSharp />
                         )}

@@ -12,7 +12,7 @@ function App() {
 
     const ProtectRoute = ({ children }: any): JSX.Element => {
         setLoading(true);
-        if (!currentUser && userActive == "") {
+        if (!currentUser && userActive === "") {
             return <Navigate to="/login" />;
         }
 
