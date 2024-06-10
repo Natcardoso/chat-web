@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/chat-web/static/js/main.c53642b3.js",
+    "static/media/conect.svg": "/chat-web/static/media/conect.a11a0412b9e11fdf97a0ce99fbdc34f7.svg",
+    "index.html": "/chat-web/index.html",
+    "main.c53642b3.js.map": "/chat-web/static/js/main.c53642b3.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.c53642b3.js"
+  ]
+}
