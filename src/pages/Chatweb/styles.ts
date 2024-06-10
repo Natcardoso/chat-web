@@ -16,7 +16,7 @@ export const ContainerContent = styled.div`
 `;
 
 export const ContainerChatList = styled.div`
-    width: 40%;
+    width: 35rem;
     background: #fff;
     position: relative;
 `;
@@ -100,5 +100,9 @@ export const ContainerContactList = styled.div`
         background-color: #80808075;
         border-radius: 20px;
         border: 3px solid var(--gray);
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
     }
 `;

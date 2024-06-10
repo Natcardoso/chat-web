@@ -20,16 +20,12 @@ export function Login() {
     const [loading, setLoading] = useState<boolean>(false);
     const { setUserActive } = useContext(AuthContext);
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<DataProps>();
+    const { register, handleSubmit } = useForm<DataProps>();
     const onSubmit: SubmitHandler<DataProps> = async (data) => {
         setLoading(true);
         try {
             await signInWithEmailAndPassword(auth, data.email, data.password);
-            navigate("/");
+            navigate("/chat-web");
             setUserActive(`${auth.currentUser?.uid}`);
         } catch (err) {
             setErr(true);

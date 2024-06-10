@@ -29,11 +29,7 @@ export function Register() {
     const readerPhoto = photo?.item(0);
     const [loading, setLoading] = useState(false);
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<DataProps>();
+    const { register, handleSubmit } = useForm<DataProps>();
     const onSubmit: SubmitHandler<DataProps> = async (data) => {
         setLoading(true);
         console.log(readerPhoto);
@@ -64,7 +60,7 @@ export function Register() {
                             photoURL: downloadURL,
                         });
                         await setDoc(doc(db, "userChats", res.user.uid), {});
-                        navigate("/");
+                        navigate("/chat-web");
                     } catch (err) {
                         setErr(true);
                         setLoading(false);

@@ -67,16 +67,10 @@ export default function ChatWindown() {
     };
 
     const handleSend = async () => {
-        setLoading(true);
+        setOpenEmoji(false);
+        setText("");
+
         try {
-            await updateDoc(doc(db, "chats", data.chatId), {
-                messages: arrayUnion({
-                    id: uuid(),
-                    text,
-                    senderId: currentUser.uid,
-                    date: Timestamp.now(),
-                }),
-            });
             await updateDoc(doc(db, "userChats", currentUser.uid), {
                 [data.chatId + ".lastMessage"]: {
                     text,
@@ -89,13 +83,17 @@ export default function ChatWindown() {
                 },
                 [data.chatId + ".date"]: serverTimestamp(),
             });
+            await updateDoc(doc(db, "chats", data.chatId), {
+                messages: arrayUnion({
+                    id: uuid(),
+                    text,
+                    senderId: currentUser.uid,
+                    date: Timestamp.now(),
+                }),
+            });
         } catch (err) {
             console.log(err);
         }
-
-        setOpenEmoji(false);
-        setText("");
-        setLoading(false);
     };
 
     useEffect(() => {

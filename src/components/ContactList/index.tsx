@@ -20,6 +20,7 @@ export function ContactList({ contactUserName }: Props) {
     const [chats, setChats] = useState<any>([]);
     const { currentUser } = useContext(AuthContext);
     const { dispatch, data } = useContext(ChatContext);
+    const [filter, setFilter] = useState<any>([]);
 
     useEffect(() => {
         const getChats = () => {
@@ -38,21 +39,22 @@ export function ContactList({ contactUserName }: Props) {
         currentUser?.uid && getChats();
     }, [currentUser?.uid]);
 
+    const orderChats = Object.entries(chats).sort((a: any, b: any) => {
+        if (a[1].date < b[1].date) return a - b;
+        return 0;
+    });
+
+    // const filter = orderChats.filter((chat: any) =>
+    //     chat[1].userInfo?.displayName.includes(contactUserName)
+    // );
+
     const handleSelect = async (u: dataUser) => {
         dispatch({ type: "change_user", payload: u });
     };
 
-    const orderChats =
-        chats &&
-        Object.entries(chats).sort((a: any, b: any) => b[1].date - a[1].date);
-
-    const filterContact = orderChats?.filter((chat: any) =>
-        chat[1].userInfo?.displayName.includes(contactUserName)
-    );
-
     return (
         <Container>
-            {filterContact?.map((chat: any) => {
+            {orderChats.map((chat: any) => {
                 const date = chat[1].date;
                 let d = new Date(date?.seconds * 1000);
                 let hours = d.getHours();
@@ -81,11 +83,11 @@ export function ContactList({ contactUserName }: Props) {
                             <Message>{chat[1].lastMessage?.text}</Message>
                         </div>
                         <div className="countMessage">
-                            <div className="hours">{`${hours}:${
+                            {/* <div className="hours">{`${hours}:${
                                 `${minutes}`.length === 1
                                     ? minutes + "0"
                                     : minutes
-                            }`}</div>
+                            }`}</div> */}
                         </div>
                     </Chat>
                 );

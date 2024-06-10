@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { Loading } from "./components/Loading";
 import { AuthContext } from "./Context/authContext";
 import Chatweb from "./pages/Chatweb";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
+import { Loading } from "./components/Loading";
 
 function App() {
     const { currentUser, userActive } = useContext(AuthContext);
@@ -17,7 +17,6 @@ function App() {
         }
 
         setLoading(false);
-
         return children;
     };
 
@@ -26,10 +25,11 @@ function App() {
             <Routes>
                 <Route path="/">
                     <Route
-                        index
+                        path="/chat-web"
                         element={
                             <ProtectRoute>
                                 <Chatweb loading={loading} />
+                                {loading && <Loading />}
                             </ProtectRoute>
                         }
                     />
